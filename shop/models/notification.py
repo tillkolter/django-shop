@@ -76,7 +76,8 @@ class Notification(models.Model):
     mail_to = models.PositiveIntegerField(verbose_name=_("Mail to"), null=True,
                                           blank=True, default=None)
     mail_template = models.ForeignKey(EmailTemplate, verbose_name=_("Template"),
-                                      limit_choices_to=Q(language__isnull=True) | Q(language=''))
+                                      limit_choices_to=Q(language__isnull=True) | Q(language=''),
+                                      on_delete=models.DO_NOTHING)
 
     class Meta:
         app_label = 'shop'
@@ -93,7 +94,7 @@ class Notification(models.Model):
 
 
 class NotificationAttachment(models.Model):
-    notification = models.ForeignKey(Notification)
+    notification = models.ForeignKey(Notification, on_delete=models.CASCADE)
     attachment = FilerFileField(null=True, blank=True, related_name='email_attachment')
 
     class Meta:

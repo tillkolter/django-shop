@@ -46,7 +46,7 @@ class BaseProductPage(with_metaclass(deferred.ForeignKeyBuilder, models.Model)):
     ManyToMany relation from the polymorphic Product to the CMS Page.
     This in practice is the category.
     """
-    page = models.ForeignKey(Page)
+    page = models.ForeignKey(Page, on_delete=models.CASCADE)
     product = deferred.ForeignKey(BaseProduct)
 
     class Meta:
