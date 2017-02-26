@@ -105,7 +105,7 @@ class ForeignKeyBuilder(ModelBase):
                 continue
             mapmodel = cls._materialized_models.get(member.abstract_model)
             if mapmodel:
-                field = member.MaterializedField(mapmodel, **member.options)
+                field = member.MaterializedField(mapmodel, on_delete=models.DO_NOTHING, **member.options)
                 field.contribute_to_class(Model, attrname)
             else:
                 ForeignKeyBuilder._pending_mappings.append((Model, attrname, member,))
@@ -117,7 +117,9 @@ class ForeignKeyBuilder(ModelBase):
         """
         for mapping in ForeignKeyBuilder._pending_mappings[:]:
             if mapping[2].abstract_model == basename:
-                field = mapping[2].MaterializedField(Model, **mapping[2].options)
+                field = mapping[2].MaterializedField(Model,
+                                                     on_delete=models.CASCADE,
+                                                     **mapping[2].options)
                 field.contribute_to_class(mapping[0], mapping[1])
                 ForeignKeyBuilder._pending_mappings.remove(mapping)
 
