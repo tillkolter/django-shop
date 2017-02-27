@@ -21,7 +21,7 @@ from cmsplugin_cascade.fields import GlossaryField
 from cmsplugin_cascade.link.cms_plugins import TextLinkPlugin
 from cmsplugin_cascade.link.forms import LinkForm, TextLinkFormMixin
 from cmsplugin_cascade.link.plugin_base import LinkElementMixin
-from cmsplugin_cascade.plugin_base import TransparentWrapper
+from cmsplugin_cascade.mixins import TransparentMixin
 from cmsplugin_cascade.bootstrap3.buttons import BootstrapButtonMixin
 from shop import app_settings
 from shop.models.cart import CartModel
@@ -303,7 +303,7 @@ class RequiredFormFieldsPlugin(ShopPluginBase):
 plugin_pool.register_plugin(RequiredFormFieldsPlugin)
 
 
-class ValidateSetOfFormsPlugin(TransparentWrapper, ShopPluginBase):
+class ValidateSetOfFormsPlugin(TransparentMixin, ShopPluginBase):
     """
     This plugin wraps arbitrary forms into the Angular directive shopFormsSet.
     This is required to validate all forms, so that a proceed button is disabled otherwise.
