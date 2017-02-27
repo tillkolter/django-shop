@@ -15,7 +15,7 @@ from cmsplugin_cascade.link.forms import TextLinkFormMixin
 from cmsplugin_cascade.link.plugin_base import LinkElementMixin
 from cmsplugin_cascade.widgets import NumberInputWidget
 from cmsplugin_cascade.bootstrap3.buttons import BootstrapButtonMixin
-from cmsplugin_cascade.mixins import TransparentMixin
+from cmsplugin_cascade.plugin_base import TransparentWrapper
 from shop import app_settings
 from shop.cascade.plugin_base import ShopPluginBase
 
@@ -27,7 +27,7 @@ class ProcessBarForm(ManageChildrenFormMixin, ModelForm):
         help_text=_("Number of steps for this proceed bar."))
 
 
-class ProcessBarPlugin(TransparentMixin, ShopPluginBase):
+class ProcessBarPlugin(TransparentWrapper, ShopPluginBase):
     name = _("Process Bar")
     form = ProcessBarForm
     parent_classes = ('BootstrapRowPlugin', 'BootstrapColumnPlugin',)
@@ -63,7 +63,7 @@ class ProcessBarPlugin(TransparentMixin, ShopPluginBase):
 plugin_pool.register_plugin(ProcessBarPlugin)
 
 
-class ProcessStepPlugin(TransparentMixin, ShopPluginBase):
+class ProcessStepPlugin(TransparentWrapper, ShopPluginBase):
     name = _("Process Step")
     parent_classes = ('ProcessBarPlugin',)
     require_parent = True

@@ -7,14 +7,14 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils.html import mark_safe
 from cms.plugin_pool import plugin_pool
 from cmsplugin_cascade.fields import GlossaryField
-from cmsplugin_cascade.mixins import TransparentMixin
+from cmsplugin_cascade.plugin_base import TransparentWrapper
 from shop import app_settings
 from shop.models.cart import CartModel
 from shop.rest.serializers import CartSerializer
 from .plugin_base import ShopPluginBase
 
 
-class ShopCartPlugin(TransparentMixin, ShopPluginBase):
+class ShopCartPlugin(TransparentWrapper, ShopPluginBase):
     name = _("Cart")
     require_parent = True
     parent_classes = ('BootstrapColumnPlugin', 'ProcessStepPlugin', 'BootstrapPanelPlugin',)

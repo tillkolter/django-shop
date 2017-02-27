@@ -213,8 +213,7 @@ class BaseCustomer(with_metaclass(deferred.ForeignKeyBuilder, models.Model)):
     object is created for anonymous customers also (with unusable password).
     """
     user = models.OneToOneField(settings.AUTH_USER_MODEL,
-                                primary_key=True,
-                                on_delete=models.SET_NULL)
+                                primary_key=True)
     recognized = CustomerStateField(_("Recognized as"),
                                     help_text=_("Designates the state the customer is recognized as."))
     last_access = models.DateTimeField(_("Last accessed"), default=timezone.now)
